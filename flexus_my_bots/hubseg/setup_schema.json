@@ -1,0 +1,10 @@
+[
+  {
+    "bs_name": "hubspot_api_key",
+    "bs_type": "string_long",
+    "bs_default": "",
+    "bs_group": "HubSpot Credentials",
+    "bs_importance": 2,
+    "bs_description": "HubSpot Private App Token. Create at: Settings → Integrations → Private Apps. Required scopes: crm.lists.read, crm.lists.write, crm.objects.contacts.read"
+  }
+]

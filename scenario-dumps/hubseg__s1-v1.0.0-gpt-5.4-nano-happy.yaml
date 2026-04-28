@@ -1,0 +1,30 @@
+# This is generated file don't edit!
+
+messages:
+- role: user
+  content: Создай сегмент всех CMO из Германии
+- role: assistant
+  tool_calls:
+  - function:
+      name: hubspot_create_segment
+      arguments: '{"name": "CMOs \u0438\u0437 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u0438", "filters":
+        [{"property": "country", "operator": "IS_EQUAL_TO", "value": "Germany"}, {"property": "jobtitle",
+        "operator": "CONTAINS", "value": "CMO"}]}'
+    id: fakecall_1
+    type: function
+- role: tool
+  call_id: fakecall_1
+  content: '{"ok": true, "list_id": "12345", "name": "CMOs \u0438\u0437 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u0438",
+    "processingType": "DYNAMIC", "memberCount": 47}'
+- role: assistant
+  content: |
+    ✅ Сегмент **«CMOs из Германии»** создан!
+
+    **47 контактов** соответствуют критериям (country = Germany, jobtitle содержит CMO). Список динамический — обновляется автоматически.
+
+    **Где найти в HubSpot:** Маркетинг → Списки → «CMOs из Германии»
+
+    **Что можно сделать:**
+    - 📧 Запустить email-кампанию для этой аудитории
+    - ⚙️ Добавить в HubSpot workflow
+    - 🎯 Синхронизировать с LinkedIn Ads

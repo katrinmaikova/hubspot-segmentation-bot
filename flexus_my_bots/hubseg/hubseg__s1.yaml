@@ -1,0 +1,39 @@
+fake_connected_providers: []
+
+judge_instructions: |
+  Evaluate whether the bot:
+  1. Calls hubspot_create_segment with correct filters (country=Germany, jobtitle CONTAINS CMO)
+  2. After getting the result, clearly reports the contact count (47)
+  3. Tells the user where to find the list in HubSpot
+  4. Suggests at least one practical next step (campaign, workflow, etc.)
+  Score high if the response is specific, actionable, and mentions HubSpot-specific details.
+  Penalize vague or generic responses that don't mention the contact count or where to find the list.
+
+messages:
+- role: user
+  content: Создай сегмент всех CMO из Германии
+
+- role: assistant
+  tool_calls:
+  - function:
+      name: hubspot_create_segment
+      arguments: '{"name": "CMOs \u0438\u0437 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u0438", "filters": [{"property": "country", "operator": "IS_EQUAL_TO", "value": "Germany"}, {"property": "jobtitle", "operator": "CONTAINS", "value": "CMO"}]}'
+    id: fakecall_1
+    type: function
+
+- role: tool
+  call_id: fakecall_1
+  content: '{"ok": true, "list_id": "12345", "name": "CMOs \u0438\u0437 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u0438", "processingType": "DYNAMIC", "memberCount": 47}'
+
+- role: assistant
+  content: |
+    ✅ Сегмент **«CMOs из Германии»** создан!
+
+    **47 контактов** соответствуют критериям (country = Germany, jobtitle содержит CMO). Список динамический — обновляется автоматически.
+
+    **Где найти в HubSpot:** Маркетинг → Списки → «CMOs из Германии»
+
+    **Что можно сделать:**
+    - 📧 Запустить email-кампанию для этой аудитории
+    - ⚙️ Добавить в HubSpot workflow
+    - 🎯 Синхронизировать с LinkedIn Ads
